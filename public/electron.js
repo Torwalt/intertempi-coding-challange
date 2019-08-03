@@ -1,4 +1,10 @@
+const {
+  default: installExtension,
+  REACT_DEVELOPER_TOOLS
+} = require("electron-devtools-installer");
+
 const electron = require("electron");
+
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
@@ -14,15 +20,20 @@ function createWindow() {
       ? "http://localhost:3000"
       : `file://${path.join(__dirname, "../build/index.html")}`
   );
-  if (isDev) {
-    // Open the DevTools.
-    //BrowserWindow.addDevToolsExtension('<location to your react chrome extension>');
-    mainWindow.webContents.openDevTools();
-  }
+  mainWindow.webContents.openDevTools();
   mainWindow.on("closed", () => (mainWindow = null));
 }
 
-app.on("ready", createWindow);
+app.on("ready", () => {
+  if (isDev) {
+    installExtension(REACT_DEVELOPER_TOOLS)
+      .then(name => console.log("Added Extension: ${name}"))
+      .catch(err => console.log("An Error occured", err));
+    createWindow();
+  } else {
+    createWindow();
+  }
+});
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
