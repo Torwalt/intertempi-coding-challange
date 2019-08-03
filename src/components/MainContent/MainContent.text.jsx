@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Navigation from "./welcome.nav";
+import Navigation from "./MainContent.nav";
 import Content from "./mainContent";
 import "./welcome.css";
 
