@@ -1,34 +1,27 @@
-import db from "./database.service";
+import { IUser } from "../models/User";
 import { IMessage } from "../models/Message";
 import { EncryptionService } from "./encrypt.service";
+import db from "../models/User";
+var User = require("../models/User");
 
-export default class UserService {
-  constructor() {
-    var encryptService = new EncryptionService();
-  }
-
+export class UserService {
   createUser(newUser) {
-    newUser.password = this.encryptService.hashPassword(newUser);
-    db.get("users").push(newUser);
+    return new Promise((resolve, reject) => {
+      let msg = { content: "", type: "" };
+      db.find({ email: newUser.email }, function(err, docs) {
+        if (docs.length) {
+          msg.content = `${newUser.email} is already taken!`;
+          msg.type = "Error";
+          reject(msg);
+        } else {
+          db.insert(newUser);
+          msg.content = `The account ${
+            newUser.email
+          } was successfully created!`;
+          msg.type = "Error";
+          resolve(msg);
+        }
+      });
+    });
   }
-
-  //   checkIfUserExists(newUser): Promise<IMessage> {
-  //     let msg: IMessage
-  //     let p = new Promise((resolve, reject) => {
-  //       User.find({ email: newUser.email }, function(err, docs) {
-  //         if (docs.length) {
-  //           msg.content = `${newUser.email} is already taken!`;
-  //           msg.type = "Error";
-  //           return;
-  //         } else {
-  //           msg.content = `The account ${
-  //             newUser.email
-  //           } was successfully created!`;
-  //           msg.type = "Error";
-  //         }
-  //       })
-  //       });
-  //     return p
-  //     });
-  //   }
 }

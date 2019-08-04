@@ -9,11 +9,12 @@ import {
   Row
 } from "react-bootstrap";
 
-import UserService from "../../services/user.service";
+// const UserService = require("../../services/user.service");
 
 export class Register extends Component {
   constructor(props) {
     super(props);
+    // this.UserService = UserService
 
     this.state = {
       email: "",
@@ -42,8 +43,14 @@ export class Register extends Component {
       email: this.state.email,
       password: this.state.password
     };
-    UserService.createUser(newUser);
-    this.props.history.push("/");
+    // UserService.createUser(newUser).then(msg => {
+    //   if ((msg.type = "Error")) {
+    //     console.log(msg);
+    //   } else {
+    //     console.log(msg);
+    //     this.props.history.push("/");
+    //   }
+    // });
   };
 
   nextPath(path) {
