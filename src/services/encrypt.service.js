@@ -1,4 +1,3 @@
-import { IUser } from "../models/User";
 import bcrypt from "bcrypt";
 
 export class EncryptionService {
@@ -19,7 +18,7 @@ export class EncryptionService {
   //     return hashedPassword;
   //   }
 
-  hashPassword(user: IUser): String {
+  hashPassword(user) {
     return bcrypt.hashSync("myPassword", 10);
   }
 }

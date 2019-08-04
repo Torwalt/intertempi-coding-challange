@@ -1,13 +1,15 @@
-import User, { IUser } from "../models/User";
+import db from "./database.service";
 import { IMessage } from "../models/Message";
 import { EncryptionService } from "./encrypt.service";
 
-export class UserService {
-  constructor(private encryptService: EncryptionService) {}
+export default class UserService {
+  constructor() {
+    var encryptService = new EncryptionService();
+  }
 
-  createUser(newUser: IUser) {
+  createUser(newUser) {
     newUser.password = this.encryptService.hashPassword(newUser);
-    newUser.save();
+    db.get("users").push(newUser);
   }
 
   //   checkIfUserExists(newUser): Promise<IMessage> {

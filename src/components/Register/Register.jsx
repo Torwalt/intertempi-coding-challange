@@ -9,7 +9,7 @@ import {
   Row
 } from "react-bootstrap";
 
-import { UserService } from "../../services/user.service";
+import UserService from "../../services/user.service";
 
 export class Register extends Component {
   constructor(props) {
