@@ -6,24 +6,20 @@ import { Content } from "../MainContent";
 import { Register } from "../Register";
 
 import "./App.css";
-import PrivateRoute from "../../routes/PrivateRoute"
+import PrivateRoute from "../../routes/PrivateRoute";
 
 export class App extends Component {
-
   render() {
     return (
-      <Router>
-        <div className="App">
-          <body>
-            <Content />
-          </body>
-        </div>
-        <Switch>
-          <PrivateRoute component={Content} path="/" exact/>
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
-        </Switch>
-      </Router>
+      <div className="App">
+        <Router>
+          <Switch>
+            <PrivateRoute component={Content} path="/" exact />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+          </Switch>
+        </Router>
+      </div>
     );
   }
 }

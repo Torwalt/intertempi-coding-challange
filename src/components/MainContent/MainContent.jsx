@@ -7,14 +7,6 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 
 export class Content extends Component {
-  constructor(props) {
-    super(props);
-
-    // this.state = {
-    //   email: "",
-    //   password: ""
-    // };
-  }
 
   LogOut() {
     this.props.history.push("/login");
