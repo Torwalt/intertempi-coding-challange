@@ -9,6 +9,8 @@ import {
   Row
 } from "react-bootstrap";
 
+import { UserService } from "../../services/user.service";
+
 export class Register extends Component {
   constructor(props) {
     super(props);
@@ -36,6 +38,11 @@ export class Register extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    let newUser = {
+      email: this.state.email,
+      password: this.state.password
+    };
+    UserService.createUser(newUser);
     this.props.history.push("/");
   };
 
